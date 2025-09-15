@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "./globals.css";;
+import PageTransitionEffect from "@/components/PageTransitions/PageTransitionEffect";
+import localFont from "next/font/local";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const saans = localFont({
+  src: "../fonts/Saans-Regular.woff2",
+  display: "auto"
 });
 
 export const metadata: Metadata = {
@@ -25,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${saans.className} antialiased`}
       >
-        {children}
+        <PageTransitionEffect>
+          {children}
+        </PageTransitionEffect>
       </body>
     </html>
   );
