@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@csstools/normalize.css": "^12.1.1",
+    "@gsap/react": "^2.1.2",
     "@material/material-color-utilities": "^0.3.0",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.12",
     "next": "15.5.3",

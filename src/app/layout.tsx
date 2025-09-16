@@ -1,11 +1,29 @@
 import type { Metadata } from "next";
-import "./globals.css";;
+import "./globals.css";
 import PageTransitionEffect from "@/components/PageTransitions/PageTransitionEffect";
 import localFont from "next/font/local";
+import BottomNavbar from "@/components/BottomNavbar";
 
-const saans = localFont({
-  src: "../fonts/Saans-Regular.woff2",
-  display: "auto"
+export const saans = localFont({
+  src: [
+    {
+      path: "../fonts/Saans-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Saans-SemiBold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Saans-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  display: "block",
+  variable: "--font-saans",
 });
 
 export const metadata: Metadata = {
@@ -20,12 +38,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${saans.className} antialiased`}
-      >
-        <PageTransitionEffect>
-          {children}
-        </PageTransitionEffect>
+      <body className={`${saans.className} antialiased`}>
+          <PageTransitionEffect>
+            {children}
+          </PageTransitionEffect>
+          <BottomNavbar/>
       </body>
     </html>
   );
