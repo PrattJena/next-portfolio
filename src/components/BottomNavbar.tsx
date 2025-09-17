@@ -14,7 +14,7 @@ const BottomNavbar = () => {
   const pathname = usePathname();
   return (
     <LayoutGroup>
-      <nav className={`fixed z-[100] bottom-lg left-1/2 transform -translate-x-1/2`}>
+      <nav className={`fixed z-[100] bottom-md left-1/2 transform -translate-x-1/2 md:bottom-lg`}>
         <div className="flex flex-row items-center p-xs rounded-full bg-neutral-400/30 backdrop-blur-xl ring-1 ring-neutral-600/3 shadow-xl relative isolate">
           {navItems.map((item) => (
             <Link
