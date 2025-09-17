@@ -15,13 +15,13 @@ export const opacity = {
 // Orignal Slide
 export const slide = {
     initial: {
-      y: "100vh" // start off-screen
+      x: "100vw" // start off-screen
     },
     enter: {
-      y: "100vh", // animate into view
+      x: "100vw", // animate into view
     },
     exit: {
-      y: "0vh", // animate out upwards
+      x: "0vw", // animate out upwards
       transition: {
         duration: 1,
         ease: cubicBezier(0.76, 0, 0.24, 1)
@@ -48,20 +48,20 @@ export const slide = {
 // Original Perspective
 export const perspective = {
     initial: {
-      y: 0,
+      x: 0,
       scale: 1,
       opacity: 1,
       filter: "blur(0px)"
     },
     enter: {
-      y: 0,
+      x: 0,
       scale: 1,
       opacity: 1,
       filter: "blur(0px)"
     },
     exit: {
-      y: -100,
-      opacity: 0.3,
+      x: -100,
+      opacity: 0,
       filter: "blur(25px)", // Add blur on exit
       transition: {
         duration: 1.2,
