@@ -1,33 +1,37 @@
-import { cubicBezier } from "motion/react"
+import { cubicBezier } from 'motion/react';
 
 export const opacity = {
-    initial:{
-      opacity: 0
+    initial: {
+        opacity: 0,
     },
-    enter:{
-      opacity: 1,
+    enter: {
+        opacity: 1,
+        transition: {
+            duration: 0.5,
+            ease: cubicBezier(0.76, 0, 0.24, 1),
+        },
     },
-    exit:{
-      opacity: 1
-    }
-}
-  
+    exit: {
+        opacity: 1,
+    },
+};
+
 // Orignal Slide
 export const slide = {
     initial: {
-      x: "100vw" // start off-screen
+        x: '100vw', // start off-screen
     },
     enter: {
-      x: "100vw", // animate into view
+        x: '100vw', // animate into view
     },
     exit: {
-      x: "0vw", // animate out upwards
-      transition: {
-        duration: 1,
-        ease: cubicBezier(0.76, 0, 0.24, 1)
-      }
-    }
-}
+        x: '0vw', // animate out upwards
+        transition: {
+            duration: 1,
+            ease: cubicBezier(0.76, 0, 0.24, 1),
+        },
+    },
+};
 
 // export const slideFromLeft = {
 //     initial: {
@@ -48,27 +52,27 @@ export const slide = {
 // Original Perspective
 export const perspective = {
     initial: {
-      x: 0,
-      scale: 1,
-      opacity: 1,
-      filter: "blur(0px)"
+        x: 0,
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)',
     },
     enter: {
-      x: 0,
-      scale: 1,
-      opacity: 1,
-      filter: "blur(0px)"
+        x: 0,
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)',
     },
     exit: {
-      x: -100,
-      opacity: 0,
-      filter: "blur(25px)", // Add blur on exit
-      transition: {
-        duration: 1.2,
-        ease: cubicBezier(0.76, 0, 0.24, 1)
-      }
-    }
-}
+        x: -100,
+        opacity: 0,
+        filter: 'blur(25px)', // Add blur on exit
+        transition: {
+            duration: 1.2,
+            ease: cubicBezier(0.76, 0, 0.24, 1),
+        },
+    },
+};
 
 // export const perspectiveLeft = {
 //     initial: {
@@ -121,5 +125,3 @@ export const perspective = {
 //   enter:   (_: Dir) => opacity.enter,
 //   exit:    (_: Dir) => opacity.exit,
 // };
-
-

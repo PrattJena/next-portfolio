@@ -1,11 +1,11 @@
-@import url("@/lib/css/index.css");
+@import url('@/lib/css/index.css');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+    background: var(--background);
+    color: var(--foreground);
 }

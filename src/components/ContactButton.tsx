@@ -1,11 +1,13 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function ContactButton() {
-    return(
-        <Link href="/contact" className="bg-black rounded-full flex items-center justify-center">
-            <span className="caption font-semibold md:title3 md:font-semibold my-sm mx-md text-white">
+    return (
+        <Link
+            href='/contact'
+            className='flex items-center justify-center rounded-full bg-black'>
+            <span className='caption md:title3 my-sm mx-md font-semibold text-white md:font-semibold'>
                 Get in Touch
             </span>
         </Link>
-    )
+    );
 }

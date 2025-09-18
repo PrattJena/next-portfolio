@@ -1,23 +1,22 @@
-import Branding from "./SVGR/Branding";
+import Branding from './SVGR/Branding';
 
-export default function Header({showResume = true}) {
-  return (
-    <div className="grid grid-cols-9 items-center">
-      <Branding className="col-span-3 h-[6vw] md:h-[4.8vw] lg:h-[2.5vw] w-auto" />
-      
-      <div className="col-start-6 col-span-4 md:col-start-7 md:col-span-3 lg:col-start-8 lg:col-span-2 h-full">
-      {showResume && (
-        <div className="flex flex-col h-full justify-between">
-          <span className="caption font-medium md:title3 md:font-medium text-black">
-            Available for Work
-          </span>
-          <span className="caption font-medium md:title3 md:font-medium text-stone-400 cursor-pointer transition-colors duration-300 hover:text-[#ff4c24a9]">
-            View Resume
-          </span>
+export default function Header({ showResume = true }) {
+    return (
+        <div className='grid grid-cols-9 items-center'>
+            <Branding className='col-span-3 h-[6vw] w-auto md:h-[4.8vw] lg:h-[2.5vw]' />
+
+            <div className='col-span-4 col-start-6 h-full md:col-span-3 md:col-start-7 lg:col-span-2 lg:col-start-8'>
+                {showResume && (
+                    <div className='flex h-full flex-col justify-between'>
+                        <span className='caption md:title3 font-medium text-black md:font-medium'>
+                            Available for Work
+                        </span>
+                        <span className='caption md:title3 cursor-pointer font-medium text-stone-500 transition-colors duration-300 hover:text-[#ff4c24d0] md:font-medium'>
+                            View Resume
+                        </span>
+                    </div>
+                )}
+            </div>
         </div>
-      )}
-      </div>
-
-    </div>
-  );
+    );
 }

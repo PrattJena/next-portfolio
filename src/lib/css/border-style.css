@@ -1,20 +1,19 @@
 .border-solid {
-  border-style: solid;
+    border-style: solid;
 }
 
 .border-dashed {
-  border-style: dashed;
+    border-style: dashed;
 }
 
 .border-dotted {
-  border-style: dotted;
+    border-style: dotted;
 }
 
 .border-double {
-  border-style: double;
+    border-style: double;
 }
 
 .border-hidden {
     border-style: hidden;
 }
-
