@@ -12,6 +12,11 @@ export const saans = localFont({
       style: "normal",
     },
     {
+      path: "../fonts/Saans-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
       path: "../fonts/Saans-SemiBold.woff2",
       weight: "600",
       style: "normal",
