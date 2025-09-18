@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import HeroSection from "@/components/Sections/HeroSection";
+import HeroSection from "@/components/Sections/HeroSection/HeroSectionName";
 import ContactButton from "@/components/ContactButton";
 
 export default function Contact() {

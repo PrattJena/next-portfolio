@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
-import HeroSection from "@/components/Sections/HeroSection";
+import HeroSection from "@/components/Sections/HeroSection/HeroSectionName";
+import HeroSectionDescription from "@/components/Sections/HeroSection/HeroSectionDescription";
 import ContactButton from "@/components/ContactButton";
 
 export default function Home() {
@@ -15,8 +16,9 @@ export default function Home() {
         </div>
 
         {/* Row 2: Hero section (spans both cols, fills rest of height) */}
-        <div className="col-span-2">
-          <div className="flex flex-col items-center justify-end h-full">
+        <div className="col-span-2 min-h-0">
+          <div className="flex flex-col justify-end h-full items-center lg:items-start">
+            <HeroSectionDescription />
             <HeroSection />
           </div>
         </div>

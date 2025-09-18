@@ -3,7 +3,7 @@ import Branding from "./SVGR/Branding";
 export default function Header({showResume = true}) {
   return (
     <div className="grid grid-cols-9 items-center">
-      <Branding className="col-span-3 h-[6vw] md:h-[4.8vw] lg:h-[3.2vw] w-auto" />
+      <Branding className="col-span-3 h-[6vw] md:h-[4.8vw] lg:h-[2.5vw] w-auto" />
       
       <div className="col-start-6 col-span-4 md:col-start-7 md:col-span-3 lg:col-start-8 lg:col-span-2 h-full">
       {showResume && (
