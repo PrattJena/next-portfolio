@@ -3,6 +3,7 @@ import './globals.css';
 import PageTransitionEffect from '@/components/PageTransitions/PageTransitionEffect';
 import localFont from 'next/font/local';
 import BottomNavbar from '@/components/BottomNavbar';
+import PreloaderGate from '@/components/Sections/PreloaderGate';
 
 export const saans = localFont({
     src: [
@@ -44,8 +45,10 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body className={`${saans.className} antialiased`}>
-                <PageTransitionEffect>{children}</PageTransitionEffect>
-                <BottomNavbar />
+                <PreloaderGate>
+                    <PageTransitionEffect>{children}</PageTransitionEffect>
+                    <BottomNavbar />
+                </PreloaderGate>
             </body>
         </html>
     );
