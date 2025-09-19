@@ -45,7 +45,7 @@ export default function HeroSectionDescription({
         <div className='text-center lg:text-left'>
             <span
                 ref={ref}
-                className='title3 md:title1 font-medium text-neutral-500 md:font-medium'>
+                className='title3 lg:title1 font-medium text-neutral-500 lg:font-medium'>
                 I'm a{' '}
                 <span className='text-[#ff4c24]'>Full Stack Developer</span>{' '}
                 based in <br />

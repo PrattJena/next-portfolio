@@ -29,7 +29,7 @@ export default function ContactButton({ delay = 0 }) {
                 <Link
                     href='/contact'
                     className='flex items-center justify-center rounded-full bg-black'>
-                    <span className='caption md:title3 my-sm mx-md font-semibold text-white md:font-semibold'>
+                    <span className='caption md:body lg:title3 my-sm mx-md font-semibold text-white md:font-semibold lg:font-semibold'>
                         Get in Touch
                     </span>
                 </Link>

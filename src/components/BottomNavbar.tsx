@@ -22,7 +22,7 @@ const BottomNavbar = () => {
                             key={item.href}
                             href={item.href}
                             scroll={false}
-                            className='caption px-md py-sm md:title3 relative isolate z-30 cursor-pointer rounded-full font-semibold transition-colors duration-200 md:font-semibold'>
+                            className='caption px-md py-sm md:body lg:title3 relative isolate z-30 cursor-pointer rounded-full font-semibold transition-colors duration-200 md:font-semibold lg:font-semibold'>
                             {pathname === item.href && (
                                 <motion.div
                                     layoutId='activeBackground'

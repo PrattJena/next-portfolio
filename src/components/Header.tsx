@@ -58,9 +58,9 @@ export default function Header({ showResume = true, delay = 0 }) {
                 {showResume && (
                     <span
                         ref={ref}
-                        className='caption md:title3 font-medium text-black md:font-medium'>
+                        className='caption md:body lg:title3 font-medium text-black md:font-medium lg:font-medium'>
                         Available for Work <br />
-                        <span className='cursor-pointer font-medium text-stone-500 transition-colors duration-300 hover:text-[#ff4c24d0] md:font-medium'>
+                        <span className='cursor-pointer font-medium text-stone-500 transition-colors duration-300 hover:text-[#ff4c24d0] md:font-medium lg:font-medium'>
                             View Resume
                         </span>
                     </span>
