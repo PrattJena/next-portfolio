@@ -1,6 +1,13 @@
-export default function Surname({ className }: { className: string }) {
+export default function Surname({
+    style,
+    className,
+}: {
+    style?: React.CSSProperties;
+    className: string;
+}) {
     return (
         <svg
+            style={style}
             width='490'
             height='147'
             viewBox='0 0 490 147'

@@ -1,6 +1,13 @@
-export default function Name({ className }: { className: string }) {
+export default function Name({
+    style,
+    className,
+}: {
+    style?: React.CSSProperties;
+    className: string;
+}) {
     return (
         <svg
+            style={style}
             width='976'
             height='148'
             viewBox='0 0 976 148'
