@@ -5,14 +5,16 @@ import SplitText from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import Branding from './SVGR/Branding';
 import { useRef } from 'react';
+import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
 
 export default function Header({ showResume = true, delay = 0 }) {
     const container = useRef<HTMLDivElement>(null);
     const ref = useRef<HTMLElement>(null);
+    const animationsReady = usePageReady();
 
     useGSAP(
         () => {
-            if (!container.current || !ref.current) return;
+            if (!animationsReady || !container.current || !ref.current) return;
             gsap.set('.branding', {
                 yPercent: 0,
                 overflow: 'hidden',
@@ -25,33 +27,35 @@ export default function Header({ showResume = true, delay = 0 }) {
             });
 
             document.fonts.ready.then(() => {
-                let split;
-                SplitText.create(ref.current, {
+                const split = SplitText.create(ref.current, {
                     type: 'lines',
                     linesClass: 'lines++',
-                    autoSplit: true,
                     lineThreshold: 0.1,
                     mask: 'lines',
-                    onSplit: (self) => {
-                        split = gsap.from(self.lines, {
-                            duration: 1,
-                            yPercent: 100,
-                            stagger: 0.13,
-                            ease: 'power4.out',
-                            delay: delay,
-                        });
-                        return split;
-                    },
                 });
+
+                gsap.from(split.lines, {
+                    duration: 1,
+                    yPercent: 100,
+                    stagger: 0.13,
+                    ease: 'power4.out',
+                    delay: delay,
+                });
+
+                return () => {
+                    if (split) {
+                        split.revert();
+                    }
+                };
             });
         },
-        { scope: container, dependencies: [delay] }
+        { scope: container, dependencies: [delay, animationsReady] }
     );
 
     return (
         <div ref={container} className='grid grid-cols-9 items-center'>
             <span className='block overflow-y-hidden'>
-                <Branding className='branding col-span-3 block h-[6vw] w-auto md:h-[4.8vw] lg:h-[2.5vw]' />
+                <Branding className='branding col-span-3 block h-[5.3vw] w-auto md:h-[4.3vw] lg:h-[2.5vw]' />
             </span>
 
             <div className='col-span-4 col-start-6 md:col-span-3 md:col-start-7 lg:col-span-2 lg:col-start-8'>

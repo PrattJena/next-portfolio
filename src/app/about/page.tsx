@@ -7,9 +7,9 @@ export default function About() {
     return (
         <div className='px-4 py-3 md:px-6 md:py-5 lg:px-8 lg:py-6'>
             <div className='grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-x-4'>
-                <Header />
+                <Header delay={0.6} />
                 <div className='sticky top-3 z-0 lg:top-6'>
-                    <ContactButton />
+                    <ContactButton delay={0.6} />
                 </div>
 
                 <div className='col-span-2'>
