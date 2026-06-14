@@ -1,26 +1,30 @@
 import Header from '@/components/Header';
-import HeroSection from '@/components/Sections/HeroSection/HeroSectionName';
+import HeroSectionName from '@/components/Sections/HeroSection/HeroSectionName';
 import HeroSectionDescription from '@/components/Sections/HeroSection/HeroSectionDescription';
-import ContactButton from '@/components/ContactButton';
+import ContactButton from '@/components/Sections/ContactSection/ContactButton';
+import AsciiHeroBackground from '@/components/AsciiHeroBackground';
 
 export default function Home() {
-    const startDelay = 0.5;
+    const startDelay = 0;
+
     return (
-        <div className='h-[100svh] px-4 py-3 md:px-6 md:py-5 lg:px-8 lg:py-6'>
-            <div className='gap-y-3xl grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-x-4'>
-                {/* Row 1: Header (L) + Button (R) */}
-                <Header delay={startDelay + 0.5} />
-                <div className='sticky top-3 z-0 flex items-center justify-center lg:top-6'>
-                    <ContactButton delay={startDelay + 0.5} />
+        <div className='relative h-[100svh] overflow-hidden'>
+            <div className='fixed inset-0 -z-10'>
+                <AsciiHeroBackground delay={startDelay + 1.8} />
+            </div>
+
+            <div className='relative grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-x-4 px-4 py-3 md:px-6 md:py-6 lg:px-10 lg:py-5'>
+                <Header delay={startDelay + 1.0} />
+                <div className='sticky top-3 z-10 flex items-center justify-center self-start lg:top-3.5'>
+                    <ContactButton delay={startDelay + 1.0} />
                 </div>
 
-                {/* Row 2: Hero section (spans both cols, fills rest of height) */}
-                <div className='col-span-2 min-h-0'>
-                    <div className='flex h-full flex-col items-center justify-end lg:items-start'>
-                        <div className='flex flex-1 items-center lg:mb-[5vw] lg:items-end'>
-                            <HeroSectionDescription delay={startDelay + 0.3} />
-                        </div>
-                        <HeroSection delay={startDelay} />
+                <div className='col-span-2 flex min-h-0 flex-1 flex-col items-center'>
+                    <div className='flex flex-1 items-center justify-center'>
+                        <HeroSectionDescription delay={startDelay + 1.0} />
+                    </div>
+                    <div>
+                        <HeroSectionName delay={startDelay} />
                     </div>
                 </div>
             </div>

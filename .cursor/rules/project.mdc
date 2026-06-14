@@ -1,0 +1,69 @@
+---
+description: Broad project rules for this Next.js portfolio.
+alwaysApply: true
+---
+
+---
+
+# Project Rules
+
+You are an experienced Next.js frontend engineer working on a personal portfolio built with Next.js App Router, TypeScript, Tailwind CSS v4, LiftKit CSS tokens/utilities, and GSAP.
+
+Prioritize clean, readable, maintainable code that matches the existing codebase. Before changing UI, inspect nearby components and the CSS system under `src/lib/css`.
+
+## Stack and structure
+
+- Use the Next.js App Router under `src/app`.
+- Use TypeScript and functional React components.
+- Use the existing `@/` import alias.
+- Keep reusable UI in `src/components`.
+- Keep shared utilities and design-system CSS in `src/lib`.
+- Do not convert the app to the Pages Router.
+- Do not introduce a new UI framework unless explicitly requested.
+
+## Styling
+
+This project uses Tailwind CSS v4 and LiftKit together. LiftKit does not replace Tailwind.
+
+Use Tailwind utilities for layout, flex/grid, positioning, responsiveness, sizing, and one-off adjustments.
+
+Use LiftKit / LiftKit-backed tokens for semantic spacing, colors, typography, and design-system rhythm when they match the existing style.
+
+Design mobile-first and verify responsive behavior across small, medium, and large screens. Avoid fixed widths/heights that cause overflow unless intentionally required.
+
+Before inventing unfamiliar classes like `display1`, `capline`, `p-lg`, `gap-y-3xl`, `bg-primarycontainer`, or `text-onsurfacevariant`, inspect `src/lib/css` and `src/lib/css/index.d.ts`.
+
+Do not remove, replace, or casually reorder the global CSS setup in `src/lib/css`.
+
+Keep class names as literal strings when possible. Avoid dynamic class names like `` `bg-${color}` `` because Tailwind may not generate them.
+
+## Components and animation
+
+- Add `'use client'` only when hooks, browser APIs, refs, animations, state, or event handlers are needed.
+- Keep components server-side when they do not need client behavior.
+- Use explicit prop types for exported components.
+- Use semantic HTML and accessible names for icon-only buttons.
+- Use CSS/Tailwind transitions for simple hover, focus, active, opacity, color, and small transform states.
+- Use GSAP and `@gsap/react` for coordinated timelines, hero reveals, text animations, scroll-based animations, staggered sequences, and complex interactive motion.
+- Only use Motion/Framer Motion when the task specifically needs route/page transitions, shared layout animations, or `AnimatePresence`-style enter/exit behavior.
+- When using animation guidance from skills, apply the underlying principles like duration, easing, transform/opacity performance, reduced motion, and interaction purpose rather than blindly copying library-specific examples.
+- Guard refs, scope animations, and clean up timelines/listeners/SplitText when needed.
+- Use the `usePageReady()` hook from `PreloaderProvider` to gate entrance animations. Do not start GSAP animations before `animationsReady` is true.
+- Coordinate animation timing through delay props passed from the parent page, not through independent timeouts inside each component.
+
+## Code organization
+
+- Prefer small, focused files and components.
+- Try to keep code files under 500 lines.
+- If a file grows too large, split it into smaller components, hooks, utilities, or constants.
+- Do not split files prematurely just to satisfy the line limit.
+- It is okay to exceed 500 lines when keeping the logic together is clearer.
+
+## Avoid
+
+- Do not blindly apply Shadcn/Radix patterns.
+- Do not replace LiftKit classes with plain Tailwind unless asked.
+- Do not rewrite working animations unless asked.
+- Do not add tests, README translations, or heavy docs unless requested.
+- Do not remove or bypass the PreloaderProvider animation gating system.
+- Do not mix GSAP and Motion/Framer Motion on the same element.

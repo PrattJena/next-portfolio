@@ -1,75 +1,50 @@
 'use client';
 
 import gsap from 'gsap';
-import SplitText from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import Branding from './SVGR/Branding';
 import { useRef } from 'react';
 import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
-export default function Header({ showResume = true, delay = 0 }) {
+type HeaderProps = {
+    delay?: number;
+};
+
+export default function Header({ delay = 0 }: HeaderProps) {
     const container = useRef<HTMLDivElement>(null);
-    const ref = useRef<HTMLElement>(null);
     const animationsReady = usePageReady();
+    const prefersReducedMotion = usePrefersReducedMotion();
 
     useGSAP(
         () => {
-            if (!animationsReady || !container.current || !ref.current) return;
+            if (!animationsReady || !container.current) return;
+
             gsap.set('.branding', {
                 yPercent: 0,
                 overflow: 'hidden',
             });
+
+            if (prefersReducedMotion) {
+                gsap.set('.branding', { yPercent: 0 });
+                return;
+            }
+
             gsap.from('.branding', {
                 duration: 1,
                 yPercent: 100,
                 ease: 'power4.out',
-                delay: delay,
-            });
-
-            document.fonts.ready.then(() => {
-                const split = SplitText.create(ref.current, {
-                    type: 'lines',
-                    linesClass: 'lines++',
-                    lineThreshold: 0.1,
-                    mask: 'lines',
-                });
-
-                gsap.from(split.lines, {
-                    duration: 1,
-                    yPercent: 100,
-                    stagger: 0.13,
-                    ease: 'power4.out',
-                    delay: delay,
-                });
-
-                return () => {
-                    if (split) {
-                        split.revert();
-                    }
-                };
+                delay,
             });
         },
-        { scope: container, dependencies: [delay, animationsReady] }
+        { scope: container, dependencies: [delay, animationsReady, prefersReducedMotion] }
     );
 
     return (
-        <div ref={container} className='grid grid-cols-9 items-center'>
+        <div ref={container} className='flex items-center'>
             <span className='block overflow-y-hidden'>
-                <Branding className='branding col-span-3 block h-[5.3vw] w-auto md:h-[4.3vw] lg:h-[2.5vw]' />
+                <Branding className='branding block h-[4.5vw] w-auto md:h-[3.5vw] lg:h-[2vw]' />
             </span>
-
-            <div className='col-span-4 col-start-6 md:col-span-3 md:col-start-7 lg:col-span-2 lg:col-start-8'>
-                {showResume && (
-                    <span
-                        ref={ref}
-                        className='caption md:subheading lg:title3 font-medium text-black md:font-medium lg:font-medium'>
-                        Available for Work <br />
-                        <span className='cursor-pointer font-medium text-stone-500 transition-colors duration-300 hover:text-[#ff4c24d0] md:font-medium lg:font-medium'>
-                            View Resume
-                        </span>
-                    </span>
-                )}
-            </div>
         </div>
     );
 }
