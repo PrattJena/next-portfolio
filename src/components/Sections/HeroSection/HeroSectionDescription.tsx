@@ -1,4 +1,5 @@
 'use client';
+
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
@@ -18,8 +19,13 @@ export default function HeroSectionDescription({
     useGSAP(
         () => {
             if (!animationsReady || !ref.current) return;
+
+            let split: SplitText | null = null;
+
             document.fonts.ready.then(() => {
-                const split = new SplitText(ref.current, {
+                if (!ref.current) return;
+
+                split = new SplitText(ref.current, {
                     type: 'lines',
                     linesClass: 'lines++',
                     mask: 'lines',
@@ -31,29 +37,27 @@ export default function HeroSectionDescription({
                     yPercent: 100,
                     stagger: 0.13,
                     ease: 'power4.out',
-                    delay: delay,
+                    delay,
                 });
-
-                // Cleanup function
-                return () => {
-                    if (split) {
-                        split.revert();
-                    }
-                };
             });
+
+            return () => {
+                split?.revert();
+            };
         },
         { dependencies: [delay, animationsReady] }
     );
 
     return (
-        <div className='text-center lg:text-left'>
+        <div className='max-w-6xl text-center'>
             <span
                 ref={ref}
-                className='title3 lg:title1 font-medium text-neutral-500 lg:font-medium'>
-                I'm a{' '}
-                <span className='text-[#ff4c24]'>Full Stack Developer</span>{' '}
-                based in <br />
-                United States. I love bringing ideas to life.
+                className='subheading lg:title3 !font-medium text-neutral-500'>
+                I'm an{' '}
+                <span className='text-[#ff4c24]'>AI Full Stack Engineer</span>{' '}
+                building intelligent, beautiful digital experiences.
+                <br />
+                <span className='text-[#ff4c24]'>Animate your story.</span>
             </span>
         </div>
     );

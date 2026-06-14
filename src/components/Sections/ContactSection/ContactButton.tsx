@@ -1,16 +1,20 @@
 'use client';
 
-import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
+import ContactModal from './ContactModal';
 
 export default function ContactButton({ delay = 0 }) {
     const element = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLSpanElement>(null);
     const duplicateTextRef = useRef<HTMLSpanElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const animationsReady = usePageReady();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [triggerRect, setTriggerRect] = useState<DOMRect | null>(null);
 
     const { contextSafe } = useGSAP(
         () => {
@@ -85,30 +89,54 @@ export default function ContactButton({ delay = 0 }) {
         }
     });
 
-    return (
-        <span className='block overflow-y-hidden'>
-            <div ref={element}>
-                <Link
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}
-                    href='/contact'
-                    className='px-md py-sm md:px-lg md:py-md relative flex items-center justify-center rounded-full bg-black'>
-                    <div className='relative overflow-hidden'>
-                        <span
-                            ref={textRef}
-                            className='contact caption md:heading lg:title3 block font-semibold text-white md:font-semibold lg:font-semibold'>
-                            Get in Touch
-                        </span>
+    const handleClick = () => {
+        if (buttonRef.current) {
+            const rect = buttonRef.current.getBoundingClientRect();
+            setTriggerRect(rect);
+            console.log('Button position:', rect);
+        }
+        console.log('Button clicked, opening modal');
+        setIsModalOpen(true);
+    };
 
-                        <span
-                            ref={duplicateTextRef}
-                            className='contact caption md:heading lg:title3 absolute top-0 left-0 w-full font-semibold text-white md:font-semibold lg:font-semibold'
-                            style={{ color: '#ff4c24' }}>
-                            Get in Touch
-                        </span>
-                    </div>
-                </Link>
-            </div>
-        </span>
+    const handleCloseModal = () => {
+        console.log('Closing modal');
+        setIsModalOpen(false);
+    };
+
+    return (
+        <>
+            <span className='block overflow-y-hidden'>
+                <div ref={element}>
+                    <button
+                        ref={buttonRef}
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}
+                        onClick={handleClick}
+                        className='px-sm md:px-md relative flex h-full shrink-0 cursor-pointer items-center justify-center rounded-sm lg:rounded-md bg-black'>
+                        <div className='relative overflow-hidden'>
+                            <span
+                                ref={textRef}
+                                className='contact caption md:body lg:heading block font-semibold text-white whitespace-nowrap'>
+                                Get in Touch
+                            </span>
+
+                            <span
+                                ref={duplicateTextRef}
+                                className='contact caption md:body lg:heading absolute top-0 left-0 w-full font-semibold text-white whitespace-nowrap'
+                                style={{ color: '#ff4c24' }}>
+                                Get in Touch
+                            </span>
+                        </div>
+                    </button>
+                </div>
+            </span>
+
+            <ContactModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                buttonRect={triggerRect}
+            />
+        </>
     );
 }

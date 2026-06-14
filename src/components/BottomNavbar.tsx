@@ -1,8 +1,14 @@
-// BottomNavbar.tsx
 'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cubicBezier, LayoutGroup, motion } from 'motion/react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
+import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
+
+const NAV_FADE_DELAY = 1.8;
 
 const navItems = [
     { href: '/', label: 'Home' },
@@ -12,10 +18,30 @@ const navItems = [
 
 const BottomNavbar = () => {
     const pathname = usePathname();
+    const navRef = useRef<HTMLElement>(null);
+    const animationsReady = usePageReady();
+
+    useGSAP(
+        () => {
+            if (!animationsReady || !navRef.current) return;
+
+            gsap.set(navRef.current, { opacity: 0 });
+
+            gsap.to(navRef.current, {
+                opacity: 1,
+                duration: 0.6,
+                ease: 'power2.out',
+                delay: NAV_FADE_DELAY,
+            });
+        },
+        { dependencies: [animationsReady] }
+    );
+
     return (
         <LayoutGroup>
             <nav
-                className={`bottom-md md:bottom-lg fixed left-1/2 z-[100] -translate-x-1/2 transform`}>
+                ref={navRef}
+                className='bottom-md md:bottom-lg fixed left-1/2 z-[100] -translate-x-1/2 transform opacity-0'>
                 <div className='p-xs relative isolate flex flex-row items-center rounded-full bg-neutral-400/30 shadow-xl ring-1 ring-neutral-600/3 backdrop-blur-xl'>
                     {navItems.map((item) => (
                         <Link

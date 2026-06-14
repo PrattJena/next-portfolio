@@ -1,6 +1,6 @@
 // app/about/page.tsx (your page)
 import Header from '@/components/Header';
-import ContactButton from '@/components/ContactButton';
+import ContactButton from '@/components/Sections/ContactSection/ContactButton';
 
 export default function About() {
     const hello = 'hello';

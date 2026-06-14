@@ -6,7 +6,7 @@ export default function Contact() {
             <div className='grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-x-4'>
                 {/* Row 1: Header (L) + Button (R) */}
                 <div className='col-span-2'>
-                    <Header showResume={false} />
+                    <Header />
                 </div>
 
                 {/* Row 2: Hero section (spans both cols, fills rest of height) */}
