@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import Branding from './SVGR/Branding';
 import { useRef } from 'react';
 import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 type HeaderProps = {
     delay?: number;
@@ -13,6 +14,7 @@ type HeaderProps = {
 export default function Header({ delay = 0 }: HeaderProps) {
     const container = useRef<HTMLDivElement>(null);
     const animationsReady = usePageReady();
+    const prefersReducedMotion = usePrefersReducedMotion();
 
     useGSAP(
         () => {
@@ -23,6 +25,11 @@ export default function Header({ delay = 0 }: HeaderProps) {
                 overflow: 'hidden',
             });
 
+            if (prefersReducedMotion) {
+                gsap.set('.branding', { yPercent: 0 });
+                return;
+            }
+
             gsap.from('.branding', {
                 duration: 1,
                 yPercent: 100,
@@ -30,7 +37,7 @@ export default function Header({ delay = 0 }: HeaderProps) {
                 delay,
             });
         },
-        { scope: container, dependencies: [delay, animationsReady] }
+        { scope: container, dependencies: [delay, animationsReady, prefersReducedMotion] }
     );
 
     return (

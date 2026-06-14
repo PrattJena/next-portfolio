@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useRef } from 'react';
 import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 gsap.registerPlugin(SplitText);
 
@@ -14,25 +15,33 @@ export default function HeroSectionDescription({
     delay?: number;
 }) {
     const animationsReady = usePageReady();
+    const prefersReducedMotion = usePrefersReducedMotion();
     const ref = useRef<HTMLElement>(null);
+    const splitRef = useRef<SplitText | null>(null);
 
     useGSAP(
         () => {
             if (!animationsReady || !ref.current) return;
 
-            let split: SplitText | null = null;
+            let cancelled = false;
 
             document.fonts.ready.then(() => {
-                if (!ref.current) return;
+                if (cancelled || !ref.current) return;
 
-                split = new SplitText(ref.current, {
+                splitRef.current?.revert();
+                splitRef.current = new SplitText(ref.current, {
                     type: 'lines',
                     linesClass: 'lines++',
                     mask: 'lines',
                     lineThreshold: 0.1,
                 });
 
-                gsap.from(split.lines, {
+                if (prefersReducedMotion) {
+                    gsap.set(splitRef.current.lines, { yPercent: 0 });
+                    return;
+                }
+
+                gsap.from(splitRef.current.lines, {
                     duration: 1,
                     yPercent: 100,
                     stagger: 0.13,
@@ -42,10 +51,12 @@ export default function HeroSectionDescription({
             });
 
             return () => {
-                split?.revert();
+                cancelled = true;
+                splitRef.current?.revert();
+                splitRef.current = null;
             };
         },
-        { dependencies: [delay, animationsReady] }
+        { dependencies: [delay, animationsReady, prefersReducedMotion] }
     );
 
     return (

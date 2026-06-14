@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
 import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 const NAV_FADE_DELAY = 1.8;
 
@@ -20,10 +21,16 @@ const BottomNavbar = () => {
     const pathname = usePathname();
     const navRef = useRef<HTMLElement>(null);
     const animationsReady = usePageReady();
+    const prefersReducedMotion = usePrefersReducedMotion();
 
     useGSAP(
         () => {
             if (!animationsReady || !navRef.current) return;
+
+            if (prefersReducedMotion) {
+                gsap.set(navRef.current, { opacity: 1 });
+                return;
+            }
 
             gsap.set(navRef.current, { opacity: 0 });
 
@@ -34,14 +41,14 @@ const BottomNavbar = () => {
                 delay: NAV_FADE_DELAY,
             });
         },
-        { dependencies: [animationsReady] }
+        { dependencies: [animationsReady, prefersReducedMotion] }
     );
 
     return (
         <LayoutGroup>
             <nav
                 ref={navRef}
-                className='bottom-md md:bottom-lg fixed left-1/2 z-[100] -translate-x-1/2 transform opacity-0'>
+                className='bottom-md md:bottom-lg motion-reduce:opacity-100 fixed left-1/2 z-[100] -translate-x-1/2 transform'>
                 <div className='p-xs relative isolate flex flex-row items-center rounded-full bg-neutral-400/30 shadow-xl ring-1 ring-neutral-600/3 backdrop-blur-xl'>
                     {navItems.map((item) => (
                         <Link
@@ -56,7 +63,7 @@ const BottomNavbar = () => {
                                     transition={{
                                         type: 'tween',
                                         ease: cubicBezier(0.76, 0, 0.24, 1),
-                                        duration: 0.5,
+                                        duration: prefersReducedMotion ? 0 : 0.5,
                                     }}
                                     style={{
                                         position: 'absolute',

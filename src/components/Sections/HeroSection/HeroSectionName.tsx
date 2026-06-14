@@ -5,16 +5,23 @@ import { useGSAP } from '@gsap/react';
 import HeroName, { letterIds } from '@/components/SVGR/HeroName';
 import { useRef } from 'react';
 import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 export default function HeroSectionName({ delay = 0 }: { delay?: number }) {
     const container = useRef<HTMLDivElement>(null);
     const animationsReady = usePageReady();
+    const prefersReducedMotion = usePrefersReducedMotion();
 
     useGSAP(
         () => {
             if (!animationsReady || !container.current) return;
 
             const letters = letterIds.map((id) => `#${id}`);
+
+            if (prefersReducedMotion) {
+                gsap.set(letters, { opacity: 1, yPercent: 0 });
+                return;
+            }
 
             gsap.set(letters, {
                 opacity: 0,
@@ -31,7 +38,7 @@ export default function HeroSectionName({ delay = 0 }: { delay?: number }) {
                 delay,
             });
         },
-        { scope: container, dependencies: [delay, animationsReady] }
+        { scope: container, dependencies: [delay, animationsReady, prefersReducedMotion] }
     );
 
     return (
