@@ -5,7 +5,7 @@ import { usePageReady } from '@/components/Sections/Preloader/PreloaderProvider'
 
 const CHARS = ' .:-=+*#%@'.split('');
 
-const ORANGE: [number, number, number] = [255, 90, 56];
+const ORANGE: [number, number, number] = [255, 160, 122];
 const WHITE: [number, number, number] = [255, 255, 255];
 
 const FADE_DURATION = 2500;

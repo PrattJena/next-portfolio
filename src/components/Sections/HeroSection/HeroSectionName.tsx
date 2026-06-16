@@ -24,16 +24,16 @@ export default function HeroSectionName({ delay = 0 }: { delay?: number }) {
             }
 
             gsap.set(letters, {
-                opacity: 0,
-                yPercent: 100,
+                // opacity: 0,
+                yPercent: 110,
                 transformOrigin: '50% 100%',
             });
 
             gsap.to(letters, {
-                opacity: 1,
+                // opacity: 1,
                 yPercent: 0,
-                duration: 0.8,
-                stagger: 0.08,
+                duration: 0.65,
+                stagger: 0.065,
                 ease: 'power4.out',
                 delay,
             });
