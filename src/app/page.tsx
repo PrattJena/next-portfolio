@@ -3,12 +3,14 @@ import HeroSectionName from '@/components/Sections/HeroSection/HeroSectionName';
 import HeroSectionDescription from '@/components/Sections/HeroSection/HeroSectionDescription';
 import ContactButton from '@/components/Sections/ContactSection/ContactButton';
 import AsciiHeroBackground from '@/components/AsciiHeroBackground';
+import { SetNavbarDelay } from '@/components/NavbarDelayProvider';
 
 export default function Home() {
     const startDelay = 0.2;
 
     return (
         <div className='relative h-[100svh] overflow-hidden'>
+            <SetNavbarDelay duration={2.2} />
             <div className='fixed inset-0 -z-10'>
                 <AsciiHeroBackground delay={startDelay + 1.6} />
             </div>

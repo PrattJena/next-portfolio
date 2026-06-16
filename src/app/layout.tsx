@@ -3,6 +3,7 @@ import './globals.css';
 import PageTransitionEffect from '@/components/PageTransitions/PageTransitionEffect';
 import localFont from 'next/font/local';
 import BottomNavbar from '@/components/BottomNavbar';
+import NavbarDelayProvider from '@/components/NavbarDelayProvider';
 import PreloaderProvider from '@/components/Sections/Preloader/PreloaderProvider';
 
 export const saans = localFont({
@@ -46,8 +47,10 @@ export default function RootLayout({
         <html lang='en' className='overscroll-none'>
             <body className={`${saans.className} antialiased`}>
                 <PreloaderProvider>
-                    <PageTransitionEffect>{children}</PageTransitionEffect>
-                    <BottomNavbar />
+                    <NavbarDelayProvider>
+                        <PageTransitionEffect>{children}</PageTransitionEffect>
+                        <BottomNavbar />
+                    </NavbarDelayProvider>
                 </PreloaderProvider>
             </body>
         </html>
