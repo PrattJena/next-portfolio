@@ -48,7 +48,7 @@ const BottomNavbar = () => {
         <LayoutGroup>
             <nav
                 ref={navRef}
-                className='bottom-md md:bottom-lg motion-reduce:opacity-100 fixed left-1/2 z-[100] -translate-x-1/2 transform'>
+                className='bottom-md md:bottom-lg fixed left-1/2 z-[100] -translate-x-1/2 transform'>
                 <div className='p-xs relative isolate flex flex-row items-center rounded-full bg-neutral-400/30 shadow-xl ring-1 ring-neutral-600/3 backdrop-blur-xl'>
                     {navItems.map((item) => (
                         <Link

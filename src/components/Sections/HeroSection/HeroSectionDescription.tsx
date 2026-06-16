@@ -52,7 +52,7 @@ export default function HeroSectionDescription({
 
     return (
         <div ref={container} className='max-w-6xl text-center'>
-            <p className='subheading lg:title3 !font-medium text-neutral-500'>
+            <p className='body md:subheading lg:heading !font-medium text-neutral-500'>
                 <span className='block overflow-y-hidden'>
                     <span className='hero-description-line block'>
                         I&apos;m an{' '}

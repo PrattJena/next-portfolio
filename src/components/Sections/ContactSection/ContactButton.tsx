@@ -113,17 +113,17 @@ export default function ContactButton({ delay = 0 }) {
                         onMouseEnter={onMouseEnter}
                         onMouseLeave={onMouseLeave}
                         onClick={handleClick}
-                        className='px-sm md:px-md relative flex h-full shrink-0 cursor-pointer items-center justify-center rounded-sm lg:rounded-md bg-black'>
-                        <div className='relative overflow-hidden'>
+                        className='relative flex h-full shrink-0 cursor-pointer items-center justify-center rounded-[0.25rem] md:rounded-[0.265rem] lg:rounded-[0.285rem] bg-black'>
+                        <div className='relative overflow-hidden '>
                             <span
                                 ref={textRef}
-                                className='contact caption md:body lg:heading block font-semibold text-white whitespace-nowrap'>
+                                className='contact caption md:callout lg:subheading block !font-semibold text-white whitespace-nowrap'>
                                 Get in Touch
                             </span>
 
                             <span
                                 ref={duplicateTextRef}
-                                className='contact caption md:body lg:heading absolute top-0 left-0 w-full font-semibold text-white whitespace-nowrap'
+                                className='contact caption md:callout lg:subheading absolute top-0 left-0 w-full !font-semibold text-white whitespace-nowrap'
                                 style={{ color: '#ff4c24' }}>
                                 Get in Touch
                             </span>
